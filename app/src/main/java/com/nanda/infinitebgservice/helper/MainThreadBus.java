@@ -5,10 +5,6 @@ import android.os.Looper;
 
 import com.squareup.otto.Bus;
 
-/**
- * Created by Nandagopal on 6/15/17.
- */
-
 public class MainThreadBus extends Bus {
     private final Handler mainThreadHandler;
 

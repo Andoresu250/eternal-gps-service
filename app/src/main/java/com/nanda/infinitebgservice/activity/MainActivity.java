@@ -4,6 +4,7 @@ package com.nanda.infinitebgservice.activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.nanda.infinitebgservice.R;
 import com.nanda.infinitebgservice.app.AppController;
 import com.nanda.infinitebgservice.base.BaseActivity;
 import com.nanda.infinitebgservice.events.ServiceRunningEvent;
+import com.nanda.infinitebgservice.helper.ObjectWrapperForBinder;
 import com.nanda.infinitebgservice.service.SensorService;
 import com.squareup.otto.Subscribe;
 
@@ -22,8 +24,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
+
+    String TAG = MainActivity.class.getSimpleName();
+
     @BindView(R.id.tv_bg_service_status)
     TextView tvBgServiceStatus;
+    @BindView(R.id.tv_bg_service_location)
+    TextView tvBgServiceLocation;
     @BindView(R.id.btn_start_service)
     Button btnStartService;
     @BindView(R.id.btn_stop_service)
@@ -41,12 +48,22 @@ public class MainActivity extends BaseActivity {
 
         mSensorService = new SensorService();
         mServiceIntent = new Intent(this, mSensorService.getClass());
+        Bundle bundle = new Bundle();
+        Object activity  = this;
+        bundle.putBinder("MainActivity", new ObjectWrapperForBinder(activity));
+        mServiceIntent.putExtras(bundle);
+        startService(mServiceIntent);
     }
 
     @Subscribe
     public void onServiceStart(ServiceRunningEvent event) {
         if (event != null && event.getTime() != null && !event.getTime().isEmpty()) {
             tvBgServiceStatus.setText(event.getTime());
+            Location location = event.getLocation();
+            if(event.getLocation() != null){
+                String locationString = "Lat: " + location.getLatitude() + " Lng: " + location.getLongitude();
+                tvBgServiceLocation.setText(locationString);
+            }
         }
 
     }
@@ -85,6 +102,8 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
+
 }
 
 

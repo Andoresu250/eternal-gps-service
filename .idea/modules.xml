@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InfiniteBackgroundService.iml" filepath="$PROJECT_DIR$/InfiniteBackgroundService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Infinite-Background-Service.iml" filepath="$PROJECT_DIR$/Infinite-Background-Service.iml" />
+      <module fileurl="file://D:\Projects\front\Android\Infinite-Background-Service\InfiniteBackgroundService.iml" filepath="D:\Projects\front\Android\Infinite-Background-Service\InfiniteBackgroundService.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Projects\front\Android\Infinite-Background-Service\app\app.iml" filepath="D:\Projects\front\Android\Infinite-Background-Service\app\app.iml" />
     </modules>
   </component>
 </project>
